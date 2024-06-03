@@ -3,12 +3,12 @@ const Trade = require('../models/trades');
 module.exports = {
     getTrades: async (req, res) => {
         const { type, user_id } = req.query;
-        console.log(req.query);
+
         try {
             // Build query object
             const query = {};
             if (type) query.type = type;
-            if (user_id) query.user_id = userId;
+            if (user_id) query.user_id = user_id;
 
             // Find transactions based on query parameters
             const trades = await Trade.findAll({
@@ -45,7 +45,7 @@ module.exports = {
             const trade = await Trade.findByPk(id);
 
             if (!trade) {
-                return res.status(404).json("ID not found");
+                return res.status(404).send("ID not found");
             }
 
             res.json(trade);
